@@ -22,6 +22,7 @@ namespace Yetibyte.IgdbSharp.Client
         private const string HEADER_NAME_ACCEPT = "Accept";
 
         private const string RESOURCE_GAME_ENGINES = "game_engines";
+        private const string RESOURCE_GAME_ENGINE_LOGOS = "game_engine_logos";
 
         private const string CONTENT_TYPE_APPLICATION_JSON = "application/json";
         private const string CONTENT_TYPE_TEXT_PLAIN = "text/plain";
@@ -132,6 +133,73 @@ namespace Yetibyte.IgdbSharp.Client
                 throw exception;
 
             return response?.Data;
+        }
+
+        public async Task<IEnumerable<GameEngine>> GetGameEnginesAsync(Action<ApiQueryBuilder> queryFactory)
+        {
+            if (queryFactory == null)
+                return await GetGameEnginesAsync();
+
+            ApiQueryBuilder builder = new ApiQueryBuilder();
+            queryFactory.Invoke(builder);
+
+            ApiQuery query = builder.Build();
+
+            return await GetGameEnginesAsync(query);
+        }
+
+        public IEnumerable<GameEngineLogo> GetGameEngineLogos(IApiQuery query = null)
+        {
+            IRestRequest req = PrepareRequest(RESOURCE_GAME_ENGINE_LOGOS, query);
+
+            var gameEngineLogoResponse = _restClient.Post<List<GameEngineLogo>>(req);
+
+            Exception exception = BuildExceptionForResponse(gameEngineLogoResponse);
+
+            if (exception != null)
+                throw exception;
+
+            return gameEngineLogoResponse?.Data;
+        }
+
+        public IEnumerable<GameEngineLogo> GetGameEngineLogos(Action<ApiQueryBuilder> queryFactory)
+        {
+            if (queryFactory == null)
+                return GetGameEngineLogos();
+
+            ApiQueryBuilder builder = new ApiQueryBuilder();
+            queryFactory.Invoke(builder);
+
+            ApiQuery query = builder.Build();
+
+            return GetGameEngineLogos(query);
+        }
+
+        public async Task<IEnumerable<GameEngineLogo>> GetGameEngineLogosAsync(IApiQuery query = null)
+        {
+            IRestRequest req = PrepareRequest(RESOURCE_GAME_ENGINE_LOGOS, query);
+
+            var response = await _restClient.ExecutePostAsync<List<GameEngineLogo>>(req);
+
+            Exception exception = BuildExceptionForResponse(response);
+
+            if (exception != null)
+                throw exception;
+
+            return response?.Data;
+        }
+
+        public async Task<IEnumerable<GameEngineLogo>> GetGameEngineLogosAsync(Action<ApiQueryBuilder> queryFactory)
+        {
+            if (queryFactory == null)
+                return await GetGameEngineLogosAsync();
+
+            ApiQueryBuilder builder = new ApiQueryBuilder();
+            queryFactory.Invoke(builder);
+
+            ApiQuery query = builder.Build();
+
+            return await GetGameEngineLogosAsync(query);
         }
 
 
