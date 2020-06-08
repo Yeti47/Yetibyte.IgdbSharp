@@ -13,19 +13,6 @@ namespace Yetibyte.IgdbSharp.Images
 
         #region Static Props
 
-        /*
-         *  cover_small	90 x 128	Fit
-            screenshot_med	569 x 320	Lfill, Center gravity
-            cover_big	264 x 374	Fit
-            logo_med	284 x 160	Fit
-            screenshot_big	889 x 500	Lfill, Center gravity
-            screenshot_huge	1280 x 720	Lfill, Center gravity
-            thumb	90 x 90	Thumb, Center gravity
-            micro	35 x 35	Thumb, Center gravity
-            720p	1280 x 720	Fit, Center gravity
-            1080p	1920 x 1080	Fit, Center gravity
-         * */
-
         public static ImageSize CoverSmall { get; } = new ImageSize("cover_small", "Cover Small", 90, 128, "Fit");
         public static ImageSize ScreenshotMed { get; } = new ImageSize("screenshot_med", "Screenshot Medium", 569, 320, "Lfill, Center gravity");
         public static ImageSize CoverBig { get; } = new ImageSize("cover_big", "Cover Big", 264, 374, "Fit");
